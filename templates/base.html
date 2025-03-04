@@ -1,0 +1,95 @@
+{% load static %}
+{% load bootstrap4 %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  {% bootstrap_css %}
+
+    <style>
+        /* Taille de police pour les ordinateurs et les tablettes */
+body {
+    font-size: 20px;  /* Taille de base */
+}
+
+h1 {
+    font-size: 32px;  /* Taille de titre principale */
+}
+
+h2 {
+    font-size: 28px;  /* Taille de sous-titre */
+}
+
+
+/* Taille de police pour les téléphones (écrans de moins de 768px) */
+@media (max-width: 768px) {
+    body {
+        font-size: 18px;  /* Taille de base réduite pour le mobile */
+    }
+
+    h1 {
+        font-size: 24px;  /* Taille de titre réduite pour le mobile */
+    }
+
+    h2 {
+        font-size: 20px;  /* Taille de sous-titre réduite pour le mobile */
+    }
+}
+
+    .black-background {
+        background-color: black;
+        color: white;
+    }
+
+
+
+    </style>
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-success mb-4">
+    <img src="{% static 'cvtheque/img/instat_logo.png' %}" alt="Logo" style="height: 80px;">
+
+    <!-- Bouton pour afficher/cacher la navbar sur les petits écrans -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+            aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar collapsible -->
+    <div class="collapse navbar-collapse mr-auto" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link active" href="{% url 'accueil' %}">
+                    Accueil
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{% url 'menu' %}">Menu</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{% url 'signup' %}">Inscription</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{% url 'logout' %}">Se Déconnecter</a>
+            </li>
+
+        </ul>
+        <form class="d-flex" role="search">
+            <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+   </header>
+    {% block content %}
+
+    {% endblock content %}
+
+{% bootstrap_javascript jquery='full' %}
+</body>
+</html>

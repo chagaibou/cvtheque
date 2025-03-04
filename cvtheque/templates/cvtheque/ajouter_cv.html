@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% block content %}
+    <p>Ajouter un CV</p>
+    <form method="post" id="cv-form" enctype="multipart/form-data">
+        {{ candidatForm.as_p }}
+
+        <div id="experiences-container">
+            <p>Expériences Professionnelles</p>
+            {{ expProfessionnellesFormSet.management_form }}
+            {% for form in expProfessionnellesFormSet %}
+                {{ form.as_p }}
+            {% endfor %}
+        </div>
+        <button type="button" onclick="addExperienceForm()">Ajouter une Expérience</button>
+
+        <div id="formations-container">
+            <p>Formations</p>
+            {{ formationFormSet.management_form }}
+            {% for form in formationFormSet %}
+                {{ form.as_p }}
+            {% endfor %}
+        </div>
+        <button type="button" onclick="addFormationForm()">Ajouter une Formation</button>
+
+        <div id="competences-container">
+            <p>Compétences</p>
+            {{ competenceFormSet.management_form }}
+            {% for form in competenceFormSet %}
+                {{ form.as_p }}
+            {% endfor %}
+        </div>
+        <button type="button" onclick="addCompetenceForm()">Ajouter une Compétence</button>
+
+        <div id="langues-container">
+            <p>Langues Parlées</p>
+            {{ langueFormSet.management_form }}
+            {% for form in langueFormSet %}
+                {{ form.as_p }}
+            {% endfor %}
+        </div>
+        <button type="button" onclick="addLangueForm()">Ajouter une Langue</button>
+
+        {% csrf_token %}
+        <button type="submit">Ajouter</button>
+    </form>
+
+    <script>
+        let experienceIndex = {{ expProfessionnellesFormSet.total_form_count }};
+        let formationIndex = {{ formationFormSet.total_form_count }};
+        let competenceIndex = {{ competenceFormSet.total_form_count }};
+        let langueIndex = {{ langueFormSet.total_form_count }};
+
+        function addExperienceForm() {
+            const newForm = `
+                <input type="hidden" name="expProfessionnellesFormSet-TOTAL_FORMS" value="${experienceIndex + 1}" />
+                <input type="hidden" name="expProfessionnellesFormSet-INITIAL_FORMS" value="${experienceIndex}" />
+                <input type="hidden" name="expProfessionnellesFormSet-MAX_NUM_FORMS" value="1000" />
+                {{ expProfessionnellesFormSet.empty_form.as_p|safe }}
+            `;
+            document.getElementById('experiences-container').insertAdjacentHTML('beforeend', newForm);
+            experienceIndex++;
+        }
+
+        function addFormationForm() {
+            const newForm = `
+                <input type="hidden" name="formationFormSet-TOTAL_FORMS" value="${formationIndex + 1}" />
+                <input type="hidden" name="formationFormSet-INITIAL_FORMS" value="${formationIndex}" />
+                <input type="hidden" name="formationFormSet-MAX_NUM_FORMS" value="1000" />
+                {{ formationFormSet.empty_form.as_p|safe }}
+            `;
+            document.getElementById('formations-container').insertAdjacentHTML('beforeend', newForm);
+            formationIndex++;
+        }
+
+        function addCompetenceForm() {
+            const newForm = `
+                <input type="hidden" name="competenceFormSet-TOTAL_FORMS" value="${competenceIndex + 1}" />
+                <input type="hidden" name="competenceFormSet-INITIAL_FORMS" value="${competenceIndex}" />
+                <input type="hidden" name="competenceFormSet-MAX_NUM_FORMS" value="1000" />
+                {{ competenceFormSet.empty_form.as_p|safe }}
+            `;
+            document.getElementById('competences-container').insertAdjacentHTML('beforeend', newForm);
+            competenceIndex++;
+        }
+
+        function addLangueForm() {
+            const newForm = `
+                <input type="hidden" name="langueFormSet-TOTAL_FORMS" value="${langueIndex + 1}" />
+                <input type="hidden" name="langueFormSet-INITIAL_FORMS" value="${langueIndex}" />
+                <input type="hidden" name="langueFormSet-MAX_NUM_FORMS" value="1000" />
+                {{ langueFormSet.empty_form.as_p|safe }}
+            `;
+            document.getElementById('langues-container').insertAdjacentHTML('beforeend', newForm);
+            langueIndex++;
+        }
+    </script>
+{% endblock content %}
