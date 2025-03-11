@@ -84,10 +84,10 @@ def inscription(request):
         form = forms.InscriptionForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            # user.save()
+            #user.save()
             user.is_active = False
             user.save()
-            activateEmail(request, user, form.cleaned_data.get('email'))
+            #activateEmail(request, user, form.cleaned_data.get('email'))
             return redirect(settings.LOGIN_REDIRECT_URL)
 
         else:

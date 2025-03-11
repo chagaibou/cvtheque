@@ -5,6 +5,27 @@
       Ajouter
     </button>
 
+        <table class="table table-dark mt-5">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+       <th scope="col">Langue</th>
+       <th scope="col">Niveau de maîtrise</th>
+    </tr>
+  </thead>
+  {% for langue in langues %}
+  <tbody>
+    <tr>
+      <th scope="row"></th>
+      <td>{{ langue.langue_parlee }}</td>
+      <td>{{ langue.niveau_maitrise }}</td>
+
+    </tr>
+
+  </tbody>
+  {% endfor %}
+</table>
+
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">

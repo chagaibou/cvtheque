@@ -5,6 +5,25 @@
       Ajouter
     </button>
 
+    <table class="table table-dark mt-5">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+       <th scope="col">competence</th>
+    </tr>
+  </thead>
+  {% for competence in competences %}
+  <tbody>
+    <tr>
+      <th scope="row"></th>
+      <td>{{ competence.competence }}</td>
+
+    </tr>
+
+  </tbody>
+  {% endfor %}
+</table>
+
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">

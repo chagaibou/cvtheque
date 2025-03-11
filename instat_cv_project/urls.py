@@ -19,7 +19,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
-from cvtheque.views import menu_view,formations_view,exp_professionnelles_view,competences_view,langues_view
+from cvtheque.views import menu_view,formations_view,exp_professionnelles_view,competences_view,langues_view,send_test_email
 from authentification.views import inscription,logout_view,CustomLoginView,activate,CustomPasswordChange
 from django.contrib.auth.views import LoginView,PasswordChangeView,PasswordChangeDoneView
 
@@ -42,6 +42,7 @@ urlpatterns = [
     path('exp_professionnelles/', exp_professionnelles_view, name='exp_professionnelles'),
     path('competences/', competences_view, name='competences'),
     path('langues/', langues_view, name='langues'),
+path('send-test-email/', send_test_email, name='send_test_email'),
 path('activate/<uidb64>/<token>', activate, name='activate')
 ]
 
