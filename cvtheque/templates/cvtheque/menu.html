@@ -8,10 +8,10 @@
     <div>
         <ul class="nav">
             <li class="nav-item">
-                <a class="nav-link active menu-active menu-link" href="#" data-content-url="{% url 'formations' %}">Formations</a>
+                <a class="nav-link active menu-active menu-link" href="{% url 'formations' %}" data-content-url="{% url 'formations' %}">Formations</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link  menu-link" href="#" data-content-url="{% url 'competences' %}">Compétences</a>
+                <a class="nav-link  menu-link" href="{% url 'competences' %}" data-content-url="{% url 'competences' %}">Compétences</a>
             </li><li class="nav-item">
                 <a class="nav-link menu-link" href="#" data-content-url="{% url 'exp_professionnelles' %}">Expériences Professionnelles</a>
             </li>
@@ -48,21 +48,27 @@
     }
 
     const defaultContentUrl = "{% url 'formations' %}";
-    loadContent(defaultContentUrl);
+
 
     const defaultActiveLink = document.querySelector('.menu-active');
     if (defaultActiveLink) {
+        loadContent(defaultContentUrl);
         defaultActiveLink.classList.add('black-background');
     }
 
     navLinks.forEach(link => {
         link.addEventListener('click', function(event) {
             event.preventDefault();
-            navLinks.forEach(l => l.classList.remove('black-background'));
+
+            navLinks.forEach(l =>
+            l.classList.remove('black-background')
+            );
             this.classList.add('black-background');
             const contentUrl = this.getAttribute('data-content-url');
             loadContent(contentUrl);
         });
+
+
     });
 });
 

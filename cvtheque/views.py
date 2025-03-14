@@ -1,10 +1,10 @@
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import get_user_model
 from . import forms,models
 
-
+@login_required
 def menu_view(request):
 
 
@@ -33,6 +33,31 @@ def formations_view(request):
 
     return render(request,template_name="cvtheque/formations.html",context=context)
 
+def remove_formation(request,formation_id):
+    models.Formation.objects.filter(id = formation_id).delete()
+
+    return redirect('menu')
+def edit_formation(request,formation_id):
+    formation = get_object_or_404(models.Formation,id=formation_id)
+    edit_form =  forms.FormationForm(instance=formation)
+    delete_form = forms.DeleteFormation()
+    if request.method == 'POST':
+        if 'edit_formation' in request.POST:
+            edit_form = forms.FormationForm(request.POST,instance=formation)
+            if edit_form.is_valid():
+                edit_form.save()
+                return redirect('accueil')
+            if 'delete_formation' in request.POST:
+                delete_form = forms.DeleteFormation(request.POST)
+                if delete_form.is_valid():
+                    formation.delete()
+                    return redirect('accueil')
+
+    context = {
+        'edit_form':edit_form,
+        'delete_form':delete_form
+    }
+    return render(request,'cvtheque/edit_formations.html',context=context)
 def exp_professionnelles_view(request):
     exp_prof = models.ExperiencesProfessionnelles.objects.filter(candidat=request.user)
     form = forms.ExperiencesProfessionellesForm()
@@ -50,6 +75,9 @@ def exp_professionnelles_view(request):
 
     return render(request, template_name="cvtheque/exp_professionnelles.html",context=context)
 
+def remove_exp_professionnelles(request,exp_prof_id):
+    models.ExperiencesProfessionnelles.objects.filter(id = exp_prof_id).delete()
+    return redirect('menu')
 def competences_view(request):
     competences = models.Competence.objects.filter(candidat=request.user)
     form = forms.CompetenceForm()
@@ -65,6 +93,10 @@ def competences_view(request):
         'competences' : competences
     }
     return render(request, template_name="cvtheque/competences.html",context=context)
+
+def remove_competence(request,competence_id):
+    models.Competence.objects.filter(id=competence_id).delete()
+    return redirect('menu')
 
 def langues_view(request):
     langues = models.Langue.objects.filter(candidat=request.user)
@@ -83,6 +115,9 @@ def langues_view(request):
 
     return render(request, template_name="cvtheque/langues.html",context=context)
 
+def remove_langue(request,langue_id):
+    models.Langue.objects.filter(id=langue_id).delete()
+    return redirect('menu')
 
 
 from django.core.mail import send_mail
