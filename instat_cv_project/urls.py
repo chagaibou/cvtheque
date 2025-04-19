@@ -29,7 +29,12 @@ urlpatterns = [
     path("", CustomLoginView.as_view(
 
     ), name='accueil'),
-
+    path('listes_cv/',views.listes_cv_view,name='listes-cv'),
+    path('filter/points/', views.filter_points, name='filter_point'),
+    path('filter/instat/', views.filter_instat, name='filter_instat'),
+    path('filter/enquetes/', views.filter_enquetes, name='filter-enquete'),
+    path('filter/recensements/', views.filter_recensements, name='filter-recensement'),
+    path('filter/sondages/', views.filter_sondages, name='filter_sondages'),
     path("signup/",inscription,name='signup'),
     path("logout/",logout_view,name='logout'),
     path("menu", views.menu_view, name='menu'),

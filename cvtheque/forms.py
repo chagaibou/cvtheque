@@ -20,7 +20,7 @@ class FormationForm(ModelForm):
     edit_formation =  forms.BooleanField(widget=forms.HiddenInput,initial=True)
     class Meta:
         model = models.Formation
-        fields = ['datedebut','datefin','universite_institution','formation','niveau_degre','diplome_attestation']
+        fields = ['datedebut','datefin','universite_institution','niveau_degre','formation','diplome_attestation']
 
         widgets = {
             'datedebut': DateInput(format='%d/%m/%Y', attrs={'type': 'date'}),

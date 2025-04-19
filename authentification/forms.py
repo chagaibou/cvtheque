@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.utils.translation import gettext_lazy as _
 
 
-class InscriptionForm( UserCreationForm):
+class InscriptionForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = get_user_model()
         fields = (

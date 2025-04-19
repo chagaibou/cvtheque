@@ -2,76 +2,83 @@
 {% load static %}
 {% block content %}
 <div class="container">
-    <div class="row">
+    <div class="row d-flex justify-content-center">
         <p>Menu</p>
     </div>
-    <div>
-        <ul class="nav">
-            <li class="nav-item">
-                <a class="nav-link active menu-active menu-link" href="{% url 'formations' %}" data-content-url="{% url 'formations' %}">Formations</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link  menu-link" href="{% url 'competences' %}" data-content-url="{% url 'competences' %}">Compétences</a>
-            </li><li class="nav-item">
-                <a class="nav-link menu-link" href="#" data-content-url="{% url 'exp_professionnelles' %}">Expériences Professionnelles</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link menu-link" href="#" data-content-url="{% url 'langues' %}">Langues</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link menu-link" href="#" data-content-url="{% url 'password_change' %}">Sécurité</a>
-            </li>
-
-        </ul>
-    </div>
-    <div id="content-area">
-        <!-- Le contenu sera chargé ici -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menubarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+             <i class="fas fa-arrow-down"></i>
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="menubarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link active menu-active menu-link" href="{% url 'formations' %}">Formations</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="{% url 'competences' %}" data-content-url="{% url 'competences' %}">Compétences</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="{% url 'exp_professionnelles' %}">Expériences Professionnelles</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="{% url 'langues' %}">Langues</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="{% url 'password_change' %}">Sécurité</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="d-flex justify-content-center mt-5">
+        <img src="{% static 'cvtheque/img/instat_image.jpg' %}" alt="Logo" class="img-fluid">
     </div>
 </div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-    const navLinks = document.querySelectorAll('.menu-link');
-
-    function loadContent(url) {
-        fetch(url)
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('content-area').innerHTML = data;
-                // Initialiser les composants Bootstrap après le chargement du contenu
-                const modals = document.querySelectorAll('.modal');
-                modals.forEach(modal => {
-                    $(modal).modal('handleUpdate');
-                });
-            })
-            .catch(error => console.error('Error:', error));
-    }
-
-    const defaultContentUrl = "{% url 'formations' %}";
-
-
-    const defaultActiveLink = document.querySelector('.menu-active');
-    if (defaultActiveLink) {
-        loadContent(defaultContentUrl);
-        defaultActiveLink.classList.add('black-background');
-    }
-
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(event) {
-            event.preventDefault();
-
-            navLinks.forEach(l =>
-            l.classList.remove('black-background')
-            );
-            this.classList.add('black-background');
-            const contentUrl = this.getAttribute('data-content-url');
-            loadContent(contentUrl);
-        });
-
-
-    });
-});
-
-</script>
-
 {% endblock content %}
+
+<!--<script>-->
+<!--    document.addEventListener('DOMContentLoaded', function() {-->
+<!--    const navLinks = document.querySelectorAll('.menu-link');-->
+
+<!--    function loadContent(url) {-->
+<!--        fetch(url)-->
+<!--            .then(response => response.text())-->
+<!--            .then(data => {-->
+<!--                document.getElementById('content-area').innerHTML = data;-->
+<!--                // Initialiser les composants Bootstrap après le chargement du contenu-->
+<!--                const modals = document.querySelectorAll('.modal');-->
+<!--                modals.forEach(modal => {-->
+<!--                    $(modal).modal('handleUpdate');-->
+<!--                });-->
+<!--            })-->
+<!--            .catch(error => console.error('Error:', error));-->
+<!--    }-->
+
+<!--    const defaultContentUrl = "{% url 'formations' %}";-->
+
+
+<!--    const defaultActiveLink = document.querySelector('.menu-active');-->
+<!--    if (defaultActiveLink) {-->
+<!--        loadContent(defaultContentUrl);-->
+<!--        defaultActiveLink.classList.add('black-background');-->
+<!--    }-->
+
+<!--    navLinks.forEach(link => {-->
+<!--        link.addEventListener('click', function(event) {-->
+<!--            event.preventDefault();-->
+
+<!--            navLinks.forEach(l =>-->
+<!--            l.classList.remove('black-background')-->
+<!--            );-->
+<!--            this.classList.add('black-background');-->
+<!--            const contentUrl = this.getAttribute('data-content-url');-->
+<!--            loadContent(contentUrl);-->
+<!--        });-->
+
+
+<!--    });-->
+<!--});-->
+
+<!--</script>-->
+

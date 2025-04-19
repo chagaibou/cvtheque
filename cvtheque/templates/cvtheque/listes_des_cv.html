@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Filtrer les Utilisateurs</h2>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="btn-group d-flex flex-wrap justify-content-center" role="group">
+                <button type="button" class="btn btn-dark m-1" onclick="filterUsers('points')">Points</button>
+                <button type="button" class="btn btn-primary m-1" onclick="filterUsers('instat')">Instat</button>
+                <button type="button" class="btn btn-secondary m-1" onclick="filterUsers('enquetes')">Enquêtes</button>
+                <button type="button" class="btn btn-success m-1" onclick="filterUsers('recensements')">Recensements</button>
+                <button type="button" class="btn btn-warning m-1" onclick="filterUsers('sondages')">Sondages</button>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4" id="user-list">
+        <!-- Les utilisateurs filtrés seront affichés ici -->
+    </div>
+</div>
+
+<script>
+    function filterUsers(criteria) {
+        fetch(`/filter/${criteria}/`)
+            .then(response => response.json())
+            .then(data => {
+                const userList = document.getElementById('user-list');
+                userList.innerHTML = '';
+                const listDiv = document.createElement('div')
+                listDiv.innerHTML = `<h2>Liste des Candidats qui ont une expérience en ${criteria}</h2>`
+                userList.appendChild(listDiv);
+                data.forEach(user => {
+                    const userDiv = document.createElement('div');
+                    userDiv.className = 'col-lg-12';
+                    userDiv.innerHTML  = `
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">email : ${user.email}</h5>
+                                <p>Nom : ${user.last_name} </p>
+                                <p>Prénom : ${user.first_name} </p>
+                            </div>
+                        </div>
+                    `;
+                    userList.appendChild(userDiv);
+                });
+            });
+    }
+</script>
+{% endblock content %}

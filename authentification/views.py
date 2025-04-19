@@ -79,6 +79,10 @@ class CustomLoginView(LoginView):
 
 # Create your views here.
 def inscription(request):
+    if request.user.is_authenticated:
+        return redirect(
+            settings.LOGIN_URL)  # Redirigez vers une page appropriée pour les utilisateurs connectés
+
     form = forms.InscriptionForm()
     if request.method == 'POST':
         form = forms.InscriptionForm(request.POST)
@@ -88,7 +92,7 @@ def inscription(request):
             user.is_active = False
             user.save()
             #activateEmail(request, user, form.cleaned_data.get('email'))
-            return redirect(settings.LOGIN_REDIRECT_URL)
+            return redirect(settings.LOGIN_URL)
 
         else:
             for error in list(form.errors.values()):

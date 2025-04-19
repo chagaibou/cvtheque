@@ -3,7 +3,7 @@ from . import models
 
 
 class ExperiencesAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('candidat','datedebut','datefin', 'organisation', 'type_experience','poste')
 
 class FormationAdmin(admin.ModelAdmin):
     pass

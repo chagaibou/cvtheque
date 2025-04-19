@@ -829,6 +829,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     region = models.CharField(max_length=100,choices=REGIONS_CHOICES)
     cercle = models.CharField(max_length=100,choices=CERCLES_CHOICES)
     commune = models.CharField(max_length=100,choices=COMMUNES_CHOICES)
+    points = models.IntegerField(default=0)
 
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
